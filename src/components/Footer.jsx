@@ -12,7 +12,7 @@ export default function Footer() {
 
                 {/* Social icons */}
                 <div className="flex space-x-6">
-                    <a href="https://instagram.com/_bharathi_____" target="_blank" rel="noopener noreferrer" className="hover:text-pink-500 transition-colors">
+                    <a href="https://instagram.com/_bharathii_____" target="_blank" rel="noopener noreferrer" className="hover:text-pink-500 transition-colors">
                         <FaInstagram size={26} />
                     </a>
                     <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="hover:text-blue-600 transition-colors">

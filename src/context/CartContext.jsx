@@ -4,6 +4,8 @@ import { auth } from "../firebase";
 
 export const CartContext = createContext();
 
+const API = import.meta.env.VITE_API_URL;
+
 export const CartProvider = ({ children }) => {
 
     const [cart, setCart] = useState([]);
@@ -16,7 +18,7 @@ export const CartProvider = ({ children }) => {
             if (!user) return;
 
             const { data } = await axios.get(
-                `http://localhost:5000/api/cart/${user.uid}`
+                `${API}/api/cart/${user.uid}`
             );
 
             if (data && data.items) {
@@ -43,7 +45,7 @@ export const CartProvider = ({ children }) => {
             if (!user) return;
 
             await axios.post(
-                "http://localhost:5000/api/cart/add",
+                `${API}/api/cart/add`,
                 {
                     userId: user.uid,
                     product
@@ -64,7 +66,7 @@ export const CartProvider = ({ children }) => {
             const user = auth.currentUser;
 
             await axios.post(
-                "http://localhost:5000/api/cart/remove",
+                `${API}/api/cart/remove`,
                 {
                     userId: user.uid,
                     index
@@ -85,7 +87,7 @@ export const CartProvider = ({ children }) => {
             const user = auth.currentUser;
 
             await axios.delete(
-                `http://localhost:5000/api/cart/clear/${user.uid}`
+                `${API}/api/cart/clear/${user.uid}`
             );
 
             setCart([]);

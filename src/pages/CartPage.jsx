@@ -26,12 +26,11 @@ export default function Cart() {
         return () => unsubscribe();
     }, []);
 
+    const API = import.meta.env.VITE_API_URL;
     // Fetch cart items
     const fetchCart = async (uid) => {
         try {
-            const { data } = await axios.get(
-                `https://ecomerce-backend-wjop.onrender.com/cart/${uid}`
-            );
+            const { data } = await axios.get(`${API}/api/cart/${uid}`);
 
             setCart(data?.items || []);
         } catch (error) {
@@ -47,7 +46,10 @@ export default function Cart() {
         const updatedCart = cart.filter((_, i) => i !== index);
         setCart(updatedCart);
         try {
-            await axios.post("http://localhost:5000/api/cart/remove", { userId: user.uid, index });
+            await axios.post(`${API}/api/cart/remove`, {
+                userId: user.uid,
+                index
+            });
         } catch (error) {
             console.error("Remove error:", error);
         }
@@ -60,8 +62,9 @@ export default function Cart() {
         if (!user) return alert("Please login to proceed with payment.");
 
         try {
-            const { data } = await axios.post("http://localhost:5000/api/payment/create-order", { amount: total });
-
+            const { data } = await axios.post(`${API}/api/payment/create-order`, {
+                amount: total
+            });
             const options = {
                 key: import.meta.env.VITE_RAZORPAY_KEY,
                 amount: data.amount,
@@ -69,14 +72,14 @@ export default function Cart() {
                 order_id: data.id,
                 handler: async function (response) {
                     try {
-                        await axios.post("http://localhost:5000/api/payment/save-order", {
+                        await axios.post(`${API}/api/payment/save-order`, {
                             userId: user.uid,
                             items: cart,
                             total,
                             paymentId: response.razorpay_payment_id,
                             status: "PAID"
                         });
-                        await axios.delete(`http://localhost:5000/api/cart/clear/${user.uid}`);
+                        await axios.delete(`${API}/api/cart/clear/${user.uid}`);
                         setCart([]);
                         alert("Payment successful! Thank you for your purchase.");
                         navigate("/success");

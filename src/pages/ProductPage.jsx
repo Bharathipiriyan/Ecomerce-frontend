@@ -3,12 +3,14 @@ import axios from "axios";
 import { useEffect, useState, useContext } from "react";
 import { CartContext } from "../context/CartContext";
 
+const API = import.meta.env.VITE_API_URL;
+
 export default function ProductPage() {
     const [products, setProducts] = useState([]);
     const { addToCart } = useContext(CartContext);
 
     useEffect(() => {
-        axios.get("https://ecomerce-backend-wjop.onrender.com/products")
+        axios.get(`${API}/api/products`)
             .then(res => setProducts(res.data));
     }, []);
 

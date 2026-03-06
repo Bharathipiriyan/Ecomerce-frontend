@@ -8,7 +8,7 @@ export default function ProductPage() {
     const { addToCart } = useContext(CartContext);
 
     useEffect(() => {
-        axios.get("http://localhost:5000/api/products")
+        axios.get("https://ecomerce-backend-wjop.onrender.com")
             .then(res => setProducts(res.data));
     }, []);
 

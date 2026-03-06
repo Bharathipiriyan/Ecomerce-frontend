@@ -29,7 +29,10 @@ export default function Cart() {
     // Fetch cart items
     const fetchCart = async (uid) => {
         try {
-            const { data } = await axios.get(`https://ecomerce-backend-wjop.onrender.com${uid}`);
+            const { data } = await axios.get(
+                `https://ecomerce-backend-wjop.onrender.com/cart/${uid}`
+            );
+
             setCart(data?.items || []);
         } catch (error) {
             console.error("Fetch cart error:", error);

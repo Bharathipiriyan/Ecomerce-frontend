@@ -7,12 +7,12 @@ export default function Footer() {
 
                 {/* Copyright */}
                 <p className="text-center md:text-left text-base md:text-lg lg:text-xl font-light">
-                    &copy; {new Date().getFullYear()} MyShop. All rights reserved.
+                    &copy; {new Date().getFullYear()} Bharathi. All rights reserved.
                 </p>
 
                 {/* Social icons */}
                 <div className="flex space-x-6">
-                    <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="hover:text-pink-500 transition-colors">
+                    <a href="https://instagram.com/_bharathi_____" target="_blank" rel="noopener noreferrer" className="hover:text-pink-500 transition-colors">
                         <FaInstagram size={26} />
                     </a>
                     <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="hover:text-blue-600 transition-colors">
